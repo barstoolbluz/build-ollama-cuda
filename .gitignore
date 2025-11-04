@@ -1,0 +1,21 @@
+# Nix build results
+result*
+
+# Flox cache
+.flox/cache/
+
+# Temporary test directories
+/tmp/
+
+# Log files
+*.log
+
+# Backup files
+*.backup-*
+
+# Test scripts
+test_*.sh
+
+# Old build artifacts (if they existed)
+build.nix
+default.nix
