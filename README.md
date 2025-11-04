@@ -1,6 +1,6 @@
-# Ollama CUDA (Flox / Nix Package Manager Build)
+# Ollama CUDA (Flox Build)
 
-Custom Ollama build with CUDA support for NVIDIA GTX 9xx through RTX 50xx on non-NixOS systems using Flox or the Nix package manager.
+Custom Ollama build with CUDA support for NVIDIA GTX 9xx through RTX 50xx on non-NixOS systems using Flox.
 
 ## Problem This Solves
 
