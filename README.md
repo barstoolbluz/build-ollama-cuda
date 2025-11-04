@@ -1,6 +1,6 @@
 # Ollama CUDA for RTX 5090 (Flox Build)
 
-Custom Ollama build with CUDA support for NVIDIA RTX 5090 (Blackwell architecture, compute capability 12.0) on non-NixOS systems using Flox.
+Custom Ollama build with CUDA support for NVIDIA GTX 9xx through RTX 5000 on non-NixOS systems using Flox or the Nix package manager.
 
 ## Problem This Solves
 
