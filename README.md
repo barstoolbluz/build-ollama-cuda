@@ -12,7 +12,7 @@ The upstream nixpkgs `ollama-cuda` package has stub library paths in RUNPATH tha
 
 ```bash
 # Clone this repo
-git clone https://github.com/YOUR_USERNAME/ollama-cuda.git
+git clone https://github.com/barstoolbluz/ollama-cuda.git
 cd ollama-cuda
 
 # Activate Flox environment
