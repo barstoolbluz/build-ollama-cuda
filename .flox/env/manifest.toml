@@ -1,7 +1,7 @@
 version = 1
 
 [install]
-ollama-cuda.pkg-path = "ollama-cuda"
+ollama-cuda.pkg-path = "flox-cuda/ollama"
 
 [vars]
 OLLAMA_HOST = "0.0.0.0"

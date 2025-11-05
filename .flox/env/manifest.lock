@@ -4,7 +4,7 @@
     "version": 1,
     "install": {
       "ollama-cuda": {
-        "pkg-path": "ollama-cuda"
+        "pkg-path": "flox-cuda/ollama"
       }
     },
     "vars": {
@@ -20,60 +20,60 @@
   },
   "packages": [
     {
-      "attr_path": "ollama-cuda",
+      "attr_path": "ollama",
       "broken": false,
-      "derivation": "/nix/store/bpqnh1zrqyb462q35iz5w4sz33f8p5lv-ollama-0.12.6.drv",
+      "derivation": "/nix/store/kvrah4fyl5kcywzyz10s9xd2qgbi4zk9-ollama-0.12.6.drv",
       "description": "Get up and running with large language models locally, using CUDA for NVIDIA GPU acceleration",
       "install_id": "ollama-cuda",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=6a08e6bb4e46ff7fcbb53d409b253f6bad8a28ce",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=08dacfca559e1d7da38f3cf05f1f45ee9bfd213c",
       "name": "ollama-0.12.6",
-      "pname": "ollama-cuda",
-      "rev": "6a08e6bb4e46ff7fcbb53d409b253f6bad8a28ce",
-      "rev_count": 883951,
-      "rev_date": "2025-10-25T06:24:58Z",
-      "scrape_date": "2025-10-27T02:19:06.417901Z",
+      "pname": "ollama",
+      "rev": "08dacfca559e1d7da38f3cf05f1f45ee9bfd213c",
+      "rev_count": 886100,
+      "rev_date": "2025-10-28T17:26:24Z",
+      "scrape_date": "2025-11-05T23:45:53.769306627Z",
       "stabilities": [
+        "staging",
         "unstable"
       ],
       "unfree": false,
       "version": "0.12.6",
       "outputs_to_install": [
-        "out",
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/9x8l8irzxmr9xa1lp5w009xmynk5h1ff-ollama-0.12.6"
+        "out": "/nix/store/r90phnxzmd6a65j9n9n71dr3jq0n1jpf-ollama-0.12.6"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "ollama-cuda",
+      "attr_path": "ollama",
       "broken": false,
-      "derivation": "/nix/store/mcirbyyzbmgbgsky95lwwd6rjga9lrb6-ollama-0.12.6.drv",
+      "derivation": "/nix/store/59x9r7n15qiz6fl3rlcw2qnbf67kajkn-ollama-0.12.6.drv",
       "description": "Get up and running with large language models locally, using CUDA for NVIDIA GPU acceleration",
       "install_id": "ollama-cuda",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=6a08e6bb4e46ff7fcbb53d409b253f6bad8a28ce",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=08dacfca559e1d7da38f3cf05f1f45ee9bfd213c",
       "name": "ollama-0.12.6",
-      "pname": "ollama-cuda",
-      "rev": "6a08e6bb4e46ff7fcbb53d409b253f6bad8a28ce",
-      "rev_count": 883951,
-      "rev_date": "2025-10-25T06:24:58Z",
-      "scrape_date": "2025-10-27T03:01:38.774525Z",
+      "pname": "ollama",
+      "rev": "08dacfca559e1d7da38f3cf05f1f45ee9bfd213c",
+      "rev_count": 886100,
+      "rev_date": "2025-10-28T17:26:24Z",
+      "scrape_date": "2025-11-05T23:45:53.769620969Z",
       "stabilities": [
+        "staging",
         "unstable"
       ],
       "unfree": false,
       "version": "0.12.6",
       "outputs_to_install": [
-        "out",
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/kkyw934ba0zhsskchr1jvsy9dl6jqr2x-ollama-0.12.6"
+        "out": "/nix/store/kxdp2kj2lz277bpzclgr62cnhz32ic91-ollama-0.12.6"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
