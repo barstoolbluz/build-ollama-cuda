@@ -2,18 +2,38 @@
 
 Custom Ollama build with CUDA support for NVIDIA GTX 9xx through RTX 50xx on non-NixOS systems using Flox.
 
+## Branch Structure
+
+- **`master`** - Tracks nixpkgs-unstable (currently v0.13.1). Most stable, ~1-2 weeks behind upstream.
+- **`latest`** - Pinned to Ollama's latest stable release (currently v0.13.2). May require manual updates.
+- **`v0.12.6`** - Historical version branches for specific versions.
+
 ## Problem This Solves
 
 The upstream nixpkgs `ollama-cuda` package has stub library paths in RUNPATH that prevent GPU detection on non-NixOS systems. This custom build removes those stub paths, allowing Flox's LD_AUDIT mechanism to properly redirect to system NVIDIA drivers.
 
 ## Quick Start
 
-### Using Flox (Recommended for non-NixOS)
+### Choose Your Version
 
 ```bash
 # Clone this repo
 git clone https://github.com/barstoolbluz/ollama-cuda.git
 cd ollama-cuda
+
+# Option 1: Stable from nixpkgs (recommended)
+git checkout master  # Currently v0.13.1
+
+# Option 2: Latest upstream release
+git checkout latest  # Currently v0.13.2
+
+# Option 3: Specific historical version
+git checkout v0.12.6
+```
+
+### Using Flox (Recommended for non-NixOS)
+
+```bash
 
 # Activate Flox environment
 flox activate

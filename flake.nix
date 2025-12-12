@@ -33,19 +33,9 @@
           ];
         };
 
-        # Apply RUNPATH fix and update to v0.13.2 using overrideAttrs
+        # Apply RUNPATH fix using overrideAttrs
+        # Note: Version tracks nixpkgs. For latest upstream, use 'latest' branch
         ollama-cuda-rtx5090 = ollama-cuda-fixed.overrideAttrs (oldAttrs: {
-          # Override to v0.13.2 with proper vendorHash
-          version = "0.13.2";
-          src = pkgs.fetchFromGitHub {
-            owner = "ollama";
-            repo = "ollama";
-            rev = "v0.13.2";
-            sha256 = "sha256-ffovCXdL/Ooo2Gi/G/A5d+vIwa9LFnaiV1931x2vyG8=";
-            fetchSubmodules = true;
-          };
-          vendorHash = "sha256-NM0vtue0MFrAJCjmpYJ/rPEDWBxWCzBrWDb0MVOhY+Q=";
-
           nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.autoPatchelfHook ];
 
           # postFixup runs during fixupPhase but autoPatchelfHook runs last
