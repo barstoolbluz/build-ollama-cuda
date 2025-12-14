@@ -24,12 +24,12 @@
     owner = "ollama";
     repo = "ollama";
     rev = "v0.12.11";
-    hash = "sha256-AxOhAqW5RgbnQ5N2F5CiUZ1D7W9GXqr9KxtHE+j+lVk=";
+    hash = "sha256-o6jjn9VyLRwD1wFoUv8nNwf5QC6TOVipmMrcHtikNjI=";
     fetchSubmodules = true;
   };
 
-  # Need to update vendor hash for this version
-  vendorHash = "sha256-rMc2X2K8ylnBBvmu7wrOvbiKkyxbJP5P6B6K1h2e2xE=";
+  # Vendor hash for v0.12.11
+  vendorHash = "sha256-NM0vtue0MFrAJCjmpYJ/rPEDWBxWCzBrWDb0MVOhY+Q=";
   # Add autoPatchelfHook
   nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ autoPatchelfHook ];
 

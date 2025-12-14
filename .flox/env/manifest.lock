@@ -4,7 +4,7 @@
     "version": 1,
     "install": {
       "ollama-cuda": {
-        "pkg-path": "flox-cuda/ollama"
+        "pkg-path": "ollama-cuda"
       }
     },
     "vars": {
@@ -20,25 +20,27 @@
   },
   "packages": [
     {
-      "attr_path": "ollama",
+      "attr_path": "ollama-cuda",
       "broken": false,
       "derivation": "/nix/store/5yqv8sr5s01hhp23hw3x94f1iq4cj3bh-ollama-0.13.1.drv",
       "description": "Get up and running with large language models locally, using CUDA for NVIDIA GPU acceleration",
       "install_id": "ollama-cuda",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f61125a668a320878494449750330ca58b78c557",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
       "name": "ollama-0.13.1",
       "pname": "ollama-cuda",
-      "rev": "f61125a668a320878494449750330ca58b78c557",
-      "rev_count": 907002,
-      "rev_date": "2025-12-05T15:54:32Z",
-      "scrape_date": "2025-12-11T11:28:10.377857751Z",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T03:04:35.511297Z",
       "stabilities": [
+        "staging",
         "unstable"
       ],
       "unfree": false,
-      "version": "ollama-0.13.1",
+      "version": "0.13.1",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {
@@ -49,25 +51,27 @@
       "priority": 5
     },
     {
-      "attr_path": "ollama",
+      "attr_path": "ollama-cuda",
       "broken": false,
       "derivation": "/nix/store/ckjywziyigsjgfa15qgc7g90s5zi952i-ollama-0.13.1.drv",
       "description": "Get up and running with large language models locally, using CUDA for NVIDIA GPU acceleration",
       "install_id": "ollama-cuda",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f61125a668a320878494449750330ca58b78c557",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
       "name": "ollama-0.13.1",
       "pname": "ollama-cuda",
-      "rev": "f61125a668a320878494449750330ca58b78c557",
-      "rev_count": 907002,
-      "rev_date": "2025-12-05T15:54:32Z",
-      "scrape_date": "2025-12-11T11:28:10.377861968Z",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T03:24:01.371823Z",
       "stabilities": [
+        "staging",
         "unstable"
       ],
       "unfree": false,
-      "version": "ollama-0.13.1",
+      "version": "0.13.1",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {
