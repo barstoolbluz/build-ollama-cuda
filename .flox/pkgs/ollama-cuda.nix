@@ -1,9 +1,9 @@
-{ ollama-cuda, autoPatchelfHook }:
+{ ollama-cuda, autoPatchelfHook, fetchFromGitHub, buildGoModule }:
 
-# Override the upstream ollama-cuda to:
+# Build Ollama v0.12.11 with CUDA support
+# This version branch builds a specific ollama version (v0.12.11)
 # 1. Build for all 9 GPU architectures including RTX 5090 (sm_120)
 # 2. Fix RUNPATH to remove stub libraries and allow Flox LD_AUDIT to work
-# Note: Version tracks nixpkgs. For latest upstream, use 'latest' branch
 (ollama-cuda.override {
   acceleration = "cuda";
   cudaArches = [
@@ -18,6 +18,18 @@
     "sm_120"  # Blackwell consumer - RTX 5090
   ];
 }).overrideAttrs (oldAttrs: {
+  version = "0.12.11";
+
+  src = fetchFromGitHub {
+    owner = "ollama";
+    repo = "ollama";
+    rev = "v0.12.11";
+    hash = "sha256-AxOhAqW5RgbnQ5N2F5CiUZ1D7W9GXqr9KxtHE+j+lVk=";
+    fetchSubmodules = true;
+  };
+
+  # Need to update vendor hash for this version
+  vendorHash = "sha256-rMc2X2K8ylnBBvmu7wrOvbiKkyxbJP5P6B6K1h2e2xE=";
   # Add autoPatchelfHook
   nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ autoPatchelfHook ];
 

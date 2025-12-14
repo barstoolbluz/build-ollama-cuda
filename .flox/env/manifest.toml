@@ -1,7 +1,7 @@
 version = 1
 
 [install]
-ollama-cuda.pkg-path = "flox-cuda/ollama"
+ollama-cuda.pkg-path = "ollama-cuda"
 #cudatoolkit.pkg-path = "flox-cuda/cudaPackages_12_9.cudatoolkit"
 #cudart.pkg-path = "flox-cuda/cudaPackages_12_9.cuda_cudart"
 #cudart.priority = 7
