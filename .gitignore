@@ -19,3 +19,4 @@ test_*.sh
 # Old build artifacts (if they existed)
 build.nix
 default.nix
+VERSION_NOTES.md
