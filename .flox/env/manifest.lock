@@ -22,17 +22,17 @@
     {
       "attr_path": "ollama",
       "broken": false,
-      "derivation": "/nix/store/rdzv8c1h1x8jg3apjhyil3s23ndpahnf-ollama-0.13.5.drv",
+      "derivation": "/nix/store/8bf5nnl1xbs66cxnrdv7imqkqpmp3ykg-ollama-0.13.5.drv",
       "description": "Get up and running with large language models locally, using CUDA for NVIDIA GPU acceleration",
       "install_id": "ollama-cuda",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=cad22e7d996aea55ecab064e84834289143e44a0",
       "name": "ollama-0.13.5",
       "pname": "ollama-cuda",
-      "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
-      "rev_count": 916364,
-      "rev_date": "2025-12-25T08:32:45Z",
-      "scrape_date": "2025-12-30T11:33:58.101489128Z",
+      "rev": "cad22e7d996aea55ecab064e84834289143e44a0",
+      "rev_count": 919991,
+      "rev_date": "2025-12-30T17:40:09Z",
+      "scrape_date": "2026-01-15T13:23:28.517365189Z",
       "stabilities": [
         "staging",
         "unstable"
@@ -43,7 +43,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/azfp9jlx10j8hj1s9wd6ypb7cji3qdd9-ollama-0.13.5"
+        "out": "/nix/store/qrbrai0mm4zhhf5ssa0dicszwa2v869f-ollama-0.13.5"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -52,17 +52,17 @@
     {
       "attr_path": "ollama",
       "broken": false,
-      "derivation": "/nix/store/zf04iyd0b96gxdcri8lh7y0v3n4r27zz-ollama-0.13.5.drv",
+      "derivation": "/nix/store/l5v5jg1f8w7y3lak89alwjkgc5zfz84f-ollama-0.13.5.drv",
       "description": "Get up and running with large language models locally, using CUDA for NVIDIA GPU acceleration",
       "install_id": "ollama-cuda",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=cad22e7d996aea55ecab064e84834289143e44a0",
       "name": "ollama-0.13.5",
       "pname": "ollama-cuda",
-      "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
-      "rev_count": 916364,
-      "rev_date": "2025-12-25T08:32:45Z",
-      "scrape_date": "2025-12-30T11:33:58.101494356Z",
+      "rev": "cad22e7d996aea55ecab064e84834289143e44a0",
+      "rev_count": 919991,
+      "rev_date": "2025-12-30T17:40:09Z",
+      "scrape_date": "2026-01-15T13:23:28.517369646Z",
       "stabilities": [
         "staging",
         "unstable"
@@ -73,7 +73,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/hmp9x76a3s0n0zxfcd64fpzz98lhdyvk-ollama-0.13.5"
+        "out": "/nix/store/pgf3vw431l0y5d2x072qlflvjmin370f-ollama-0.13.5"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
