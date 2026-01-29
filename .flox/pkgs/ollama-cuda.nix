@@ -1,7 +1,7 @@
 { ollama-cuda, autoPatchelfHook, fetchFromGitHub }:
 
 # Override the upstream ollama-cuda to:
-# 1. Use latest stable Ollama v0.14.1
+# 1. Use latest stable Ollama v0.14.3
 # 2. Build for all 9 GPU architectures including RTX 5090 (sm_120)
 # 3. Fix RUNPATH to remove stub libraries and allow Flox LD_AUDIT to work
 (ollama-cuda.override {
@@ -18,13 +18,13 @@
     "sm_120"  # Blackwell consumer - RTX 5090
   ];
 }).overrideAttrs (oldAttrs: {
-  # Override to v0.14.1 (latest stable release)
-  version = "0.14.1";
+  # Override to v0.14.3 (latest stable release)
+  version = "0.14.3";
   src = fetchFromGitHub {
     owner = "ollama";
     repo = "ollama";
-    rev = "v0.14.1";
-    sha256 = "sha256-r9Qwa1bAzLlr50mB+RLkRfuCFe6FUXtR9irqvU7PAvA=";
+    rev = "v0.14.3";
+    sha256 = "sha256-SVzJDuy5qXaqxE4HqiqVhoyGLTOt57370q8r3YV18Og=";
     fetchSubmodules = true;
   };
   vendorHash = "sha256-WdHAjCD20eLj0d9v1K6VYP8vJ+IZ8BEZ3CciYLLMtxc=";
