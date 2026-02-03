@@ -1,10 +1,12 @@
-# Ollama CUDA (Flox Build)
+# Ollama CUDA
 
-Custom Ollama build with CUDA support for NVIDIA GPUs (GTX 9xx through RTX 50xx) on non-NixOS systems.
+Custom Ollama build with CUDA support for NVIDIA GPUs (GTX 9xx through RTX 50xx) on Linux systems.
 
 ## Problem This Solves
 
-The upstream nixpkgs `ollama-cuda` package has stub library paths in RUNPATH that prevent GPU detection on non-NixOS systems. This custom build removes those stub paths, allowing Flox's LD_AUDIT mechanism to properly redirect to system NVIDIA drivers.
+1. **RUNPATH stub issue (non-NixOS):** The upstream nixpkgs `ollama-cuda` package has stub library paths in RUNPATH that prevent GPU detection on non-NixOS systems. This build removes those stub paths.
+
+2. **Extended CUDA architectures:** Adds support for newer GPU architectures (including sm_120 for RTX 5090) not yet in upstream nixpkgs.
 
 ## Branches
 
@@ -14,7 +16,7 @@ The upstream nixpkgs `ollama-cuda` package has stub library paths in RUNPATH tha
 | `main` | Stable - most recently deprecated version from `latest` |
 | `v0.x.x` | Archived versions (e.g., `v0.14.3`, `v0.14.1`) |
 
-## Quick Start
+## Quick Start (Flox)
 
 ```bash
 # Clone this repo
@@ -28,7 +30,7 @@ flox build ollama-cuda
 git checkout latest
 flox build ollama-cuda
 
-# For specific version
+# For specific version (use `git branch -a` to list available versions)
 git checkout v0.14.3
 flox build ollama-cuda
 
@@ -36,17 +38,24 @@ flox build ollama-cuda
 ./result-ollama-cuda/bin/ollama serve
 ```
 
-## Publishing to FloxHub
+## Quick Start (Nix Flake)
 
 ```bash
-# Publish to your personal catalog
-flox publish ollama-cuda
+# Clone this repo
+git clone https://github.com/barstoolbluz/ollama-cuda.git
+cd ollama-cuda
 
-# Publish to an organization
-flox publish -o myorg ollama-cuda
+# Build
+nix build --extra-experimental-features 'nix-command flakes'
 
-# Then install from anywhere
-flox install <username>/ollama-cuda
+# Run the built binary
+./result/bin/ollama serve
+
+# Or run directly without building first
+nix run --extra-experimental-features 'nix-command flakes' .
+
+# Or install to your profile
+nix profile install --extra-experimental-features 'nix-command flakes' .
 ```
 
 ## Features
@@ -54,8 +63,7 @@ flox install <username>/ollama-cuda
 - CUDA support for RTX 5090 (sm_120 / compute 12.0)
 - All 9 GPU architectures supported (Maxwell through Blackwell)
 - Automatic RUNPATH fixing to remove stub libraries
-- Works on non-NixOS systems (Debian, Ubuntu, etc.)
-- Flox LD_AUDIT compatible
+- Works on any Linux distribution (NixOS and non-NixOS)
 
 ## Supported GPU Architectures
 
@@ -73,20 +81,33 @@ flox install <username>/ollama-cuda
 
 ## How It Works
 
-The Nix expression in `.flox/pkgs/ollama-cuda.nix`:
+The Nix expressions (`.flox/pkgs/ollama-cuda.nix` for Flox, `flake.nix` for pure Nix):
 
-1. Fetches the specified Ollama version directly from GitHub
-2. Overrides upstream `ollama-cuda` with extended CUDA architectures
-3. Uses `preInstallCheck` phase to run AFTER `autoPatchelfHook`
-4. Removes stub library paths from `libggml-cuda.so` RUNPATH
-5. Allows Flox's LD_AUDIT to redirect to real system drivers
+1. Fetch the specified Ollama version directly from GitHub
+2. Override upstream `ollama-cuda` with extended CUDA architectures
+3. Use `preInstallCheck` phase to run AFTER `autoPatchelfHook`
+4. Remove stub library paths from `libggml-cuda.so` RUNPATH
+5. Allow proper GPU detection on non-NixOS systems
+
+## Publishing to FloxHub
+
+```bash
+# Publish to your personal catalog
+flox publish ollama-cuda
+
+# Publish to an organization
+flox publish -o myorg ollama-cuda
+
+# Then install from anywhere
+flox install <username>/ollama-cuda
+```
 
 ## System Requirements
 
-- **OS:** Linux (non-NixOS: Debian, Ubuntu, etc.)
+- **OS:** Linux (any distribution)
 - **GPU:** NVIDIA CUDA-capable GPU
 - **Driver:** NVIDIA driver appropriate for your GPU (580.82.07+ for RTX 5090)
-- **Tools:** [Flox](https://flox.dev)
+- **Tools:** [Flox](https://flox.dev) OR Nix with flakes enabled
 
 ## File Structure
 
@@ -95,8 +116,8 @@ The Nix expression in `.flox/pkgs/ollama-cuda.nix`:
 ├── .flox/
 │   ├── env/manifest.toml       # Flox environment definition
 │   └── pkgs/
-│       └── ollama-cuda.nix     # Nix expression with RUNPATH fix
-├── flake.nix                   # Nix flake (alternative build method)
+│       └── ollama-cuda.nix     # Nix expression (for Flox)
+├── flake.nix                   # Nix flake (for pure Nix/NixOS)
 ├── flake.lock                  # Flake lock file
 └── README.md
 ```
@@ -109,26 +130,36 @@ The Nix expression in `.flox/pkgs/ollama-cuda.nix`:
 # Check GPU is visible
 nvidia-smi
 
-# Check LD_AUDIT is set (within flox activate)
+# Check LD_AUDIT is set (Flox only, within flox activate)
 flox activate -- env | grep LD_AUDIT
 
 # Run with debug output
+# Flox build:
 OLLAMA_DEBUG=1 ./result-ollama-cuda/bin/ollama serve
+# Nix flake build:
+OLLAMA_DEBUG=1 ./result/bin/ollama serve
 ```
 
 ### Verify RUNPATH Fix
 
 ```bash
 # Should NOT contain "stubs"
+# Flox build:
 readelf -d result-ollama-cuda/lib/ollama/libggml-cuda.so | grep RUNPATH
+# Nix flake build:
+readelf -d result/lib/ollama/libggml-cuda.so | grep RUNPATH
 ```
 
 ### Build Issues
 
 ```bash
-# Clean and rebuild
+# Clean and rebuild (Flox)
 rm -rf result-ollama-cuda
 flox build ollama-cuda
+
+# Clean and rebuild (Nix flake)
+rm -rf result
+nix build --extra-experimental-features 'nix-command flakes'
 ```
 
 ## License
