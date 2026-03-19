@@ -33,18 +33,18 @@
           ];
         };
 
-        # Apply RUNPATH fix and update to v0.15.4 using overrideAttrs
+        # Apply RUNPATH fix and update to v0.18.2 using overrideAttrs
         ollama-cuda-rtx5090 = ollama-cuda-fixed.overrideAttrs (oldAttrs: {
-          # Override to v0.15.4 (latest stable release)
-          version = "0.15.4";
+          # Override to v0.18.2 (latest stable release)
+          version = "0.18.2";
           src = pkgs.fetchFromGitHub {
             owner = "ollama";
             repo = "ollama";
-            rev = "v0.15.4";
-            sha256 = "sha256-5dkikrp7jVGnfFwiGkbsGsRnrsS0zcZzWQ7shOn3alw=";
+            rev = "v0.18.2";
+            sha256 = "sha256-BDCYczTZO6LKwD8+LY625pZwvJVMYUE0VwVG5pVYfGk=";
             fetchSubmodules = true;
           };
-          vendorHash = "sha256-WdHAjCD20eLj0d9v1K6VYP8vJ+IZ8BEZ3CciYLLMtxc=";
+          vendorHash = "sha256-Lc1Ktdqtv2VhJQssk8K1UOimeEjVNvDWePE9WkamCos=";
 
           nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.autoPatchelfHook ];
 
