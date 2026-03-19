@@ -29,6 +29,15 @@
   };
   vendorHash = "sha256-Lc1Ktdqtv2VhJQssk8K1UOimeEjVNvDWePE9WkamCos=";
 
+  # Skip tests that fail in sandbox or on aarch64
+  preCheck = (oldAttrs.preCheck or "") + ''
+    # integration test dir has no Go files matching aarch64 build constraints
+    rm -rf integration
+  '';
+  checkFlags = [
+    "-skip=TestPushHandler/unauthorized_push|TestThroughput"
+  ];
+
   # Add autoPatchelfHook
   nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ autoPatchelfHook ];
 
