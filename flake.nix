@@ -44,7 +44,7 @@
             sha256 = "sha256-8TbZvxxaUdROpe3gnBx0XzX62tbQ9QeJP3Yp7XXJoTQ=";
             fetchSubmodules = true;
           };
-          vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+          vendorHash = "sha256-Lc1Ktdqtv2VhJQssk8K1UOimeEjVNvDWePE9WkamCos=";
 
           # Skip tests that fail in sandbox or on aarch64
           preCheck = (oldAttrs.preCheck or "") + ''
