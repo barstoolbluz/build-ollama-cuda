@@ -1,0 +1,92 @@
+name: Check Ollama Updates
+on:
+  schedule:
+    # Daily at 5 AM UTC
+    - cron: '0 5 * * *'
+  workflow_dispatch: {}
+
+# Scheduled cron only fires on the default branch (main), but version tracking
+# happens on the `latest` branch. This workflow checks out `latest`, updates
+# versions and hashes there, and opens a PR against `latest`.
+jobs:
+  check-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout latest branch
+        uses: actions/checkout@v4
+        with:
+          ref: latest
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Setup Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Set up git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Check for updates
+        id: update
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          chmod +x .github/actions/update-ollama-version.sh
+          .github/actions/update-ollama-version.sh
+
+      - name: Create pull request
+        if: steps.update.outputs.updated == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          CURRENT="${{ steps.update.outputs.current_version }}"
+          NEW="${{ steps.update.outputs.new_version }}"
+          BRANCH="update/ollama-v${NEW}"
+
+          git add .
+          git checkout -b "$BRANCH"
+          git commit -m "ollama-cuda: ${CURRENT} -> ${NEW} (vendorHash needs update)" --signoff
+
+          git push --force origin "$BRANCH"
+
+          # Check if PR already exists
+          pr_number=$(gh pr list --head "$BRANCH" --base latest --json number --jq '.[0].number // empty')
+
+          BODY="$(cat <<EOF
+          Automated update of ollama-cuda from v${CURRENT} to v${NEW}.
+
+          ## Action Required
+
+          The \`vendorHash\` is set to a **placeholder**. You must build locally (CUDA required) to get the correct hash:
+
+          \`\`\`bash
+          flox build ollama-cuda 2>&1 | grep 'got:'
+          # Update vendorHash in both .flox/pkgs/ollama-cuda.nix and flake.nix
+          # Then push the fix to this branch
+          \`\`\`
+
+          After fixing the vendorHash, verify:
+          \`\`\`bash
+          readelf -d result-ollama-cuda/lib/ollama/libggml-cuda.so | grep RUNPATH | grep -q stubs && echo "FAIL" || echo "PASS"
+          OLLAMA_DEBUG=1 result-ollama-cuda/bin/ollama serve 2>&1 | grep -E "(count=|NVIDIA)"
+          \`\`\`
+          EOF
+          )"
+
+          if [ -n "$pr_number" ]; then
+            echo "Updating existing PR #$pr_number"
+            gh pr edit "$pr_number" \
+              --title "ollama-cuda: v${CURRENT} -> v${NEW}" \
+              --body "$BODY"
+          else
+            echo "Creating new PR"
+            gh pr create \
+              --title "ollama-cuda: v${CURRENT} -> v${NEW}" \
+              --body "$BODY" \
+              --base latest \
+              --head "$BRANCH" \
+              --label "dependencies"
+          fi
