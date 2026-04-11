@@ -46,14 +46,22 @@ jobs:
           NEW="${{ steps.update.outputs.new_version }}"
           BRANCH="update/ollama-v${NEW}"
 
+          # Check if the PR branch already exists on remote. If it does,
+          # bail out — the branch likely has manual fixes (vendorHash,
+          # test skips) that we must not clobber with a force-push. The
+          # user will need to close the stale PR if they want a fresh one.
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+            echo "Branch $BRANCH already exists on origin — skipping push to avoid clobbering manual fixes."
+            echo "If you want a fresh automated update for this version, delete the remote branch first:"
+            echo "  gh api -X DELETE repos/barstoolbluz/build-ollama-cuda/git/refs/heads/$BRANCH"
+            exit 0
+          fi
+
           git add .
           git checkout -b "$BRANCH"
           git commit -m "ollama-cuda: ${CURRENT} -> ${NEW} (vendorHash needs update)" --signoff
 
-          git push --force origin "$BRANCH"
-
-          # Check if PR already exists
-          pr_number=$(gh pr list --head "$BRANCH" --base latest --json number --jq '.[0].number // empty')
+          git push origin "$BRANCH"
 
           BODY="$(cat <<EOF
           Automated update of ollama-cuda from v${CURRENT} to v${NEW}.
@@ -76,17 +84,10 @@ jobs:
           EOF
           )"
 
-          if [ -n "$pr_number" ]; then
-            echo "Updating existing PR #$pr_number"
-            gh pr edit "$pr_number" \
-              --title "ollama-cuda: v${CURRENT} -> v${NEW}" \
-              --body "$BODY"
-          else
-            echo "Creating new PR"
-            gh pr create \
-              --title "ollama-cuda: v${CURRENT} -> v${NEW}" \
-              --body "$BODY" \
-              --base latest \
-              --head "$BRANCH" \
-              --label "dependencies"
-          fi
+          echo "Creating new PR"
+          gh pr create \
+            --title "ollama-cuda: v${CURRENT} -> v${NEW}" \
+            --body "$BODY" \
+            --base latest \
+            --head "$BRANCH" \
+            --label "dependencies"
