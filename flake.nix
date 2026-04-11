@@ -44,15 +44,17 @@
             sha256 = "sha256-/H4DZ/aRB04lKSke9XsK+vb76pcy940scoTunXO4pf4=";
             fetchSubmodules = true;
           };
-          vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+          vendorHash = "sha256-Lc1Ktdqtv2VhJQssk8K1UOimeEjVNvDWePE9WkamCos=";
 
           # Skip tests that fail in sandbox or on aarch64
           preCheck = (oldAttrs.preCheck or "") + ''
             # integration test dir has no Go files matching aarch64 build constraints
             rm -rf integration
+            # cmd/launch tests spawn subprocesses (Pi, OpenClaw) that fail in sandbox
+            rm -f cmd/launch/*_test.go
           '';
           checkFlags = [
-            "-skip=TestPushHandler/unauthorized_push|TestThroughput|TestPiRun"
+            "-skip=TestPushHandler/unauthorized_push|TestThroughput"
           ];
 
           nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.autoPatchelfHook ];
