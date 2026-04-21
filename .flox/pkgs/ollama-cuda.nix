@@ -18,24 +18,26 @@
     "sm_120"  # Blackwell consumer - RTX 5090
   ];
 }).overrideAttrs (oldAttrs: {
-  # Override to v0.20.2 (latest stable release)
-  version = "0.20.5";
+  # Override to v0.21.0
+  version = "0.21.0";
   src = fetchFromGitHub {
     owner = "ollama";
     repo = "ollama";
-    rev = "v0.20.5";
-    sha256 = "sha256-/H4DZ/aRB04lKSke9XsK+vb76pcy940scoTunXO4pf4=";
+    rev = "v0.21.0";
+    sha256 = "sha256-DtrYopNtndQXq9Xjriw5Bqell9A8RHPOvgDF8BlKtdU=";
     fetchSubmodules = true;
   };
-  vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  vendorHash = "sha256-Lc1Ktdqtv2VhJQssk8K1UOimeEjVNvDWePE9WkamCos=";
 
   # Skip tests that fail in sandbox or on aarch64
   preCheck = (oldAttrs.preCheck or "") + ''
     # integration test dir has no Go files matching aarch64 build constraints
     rm -rf integration
+    # cmd/launch tests spawn subprocesses (Pi, OpenClaw) that fail in sandbox
+    rm -f cmd/launch/*_test.go
   '';
   checkFlags = [
-    "-skip=TestPushHandler/unauthorized_push|TestThroughput|TestPiRun"
+    "-skip=TestPushHandler/unauthorized_push|TestThroughput"
   ];
 
   # Add autoPatchelfHook
