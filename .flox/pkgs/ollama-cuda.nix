@@ -19,12 +19,12 @@
   ];
 }).overrideAttrs (oldAttrs: {
   # Override to v0.20.2 (latest stable release)
-  version = "0.20.5";
+  version = "0.30.4";
   src = fetchFromGitHub {
     owner = "ollama";
     repo = "ollama";
-    rev = "v0.20.5";
-    sha256 = "sha256-/H4DZ/aRB04lKSke9XsK+vb76pcy940scoTunXO4pf4=";
+    rev = "v0.30.4";
+    sha256 = "sha256-IHX8o1Ty4Sdht5YeUYLnNPjOV7O95WeNng/coO+MHS8=";
     fetchSubmodules = true;
   };
   vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
