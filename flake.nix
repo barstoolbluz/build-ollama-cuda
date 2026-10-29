@@ -36,12 +36,12 @@
         # Apply RUNPATH fix and update to v0.20.2 using overrideAttrs
         ollama-cuda-rtx5090 = ollama-cuda-fixed.overrideAttrs (oldAttrs: {
           # Override to v0.20.2 (latest stable release)
-          version = "0.20.5";
+          version = "0.40.13";
           src = pkgs.fetchFromGitHub {
             owner = "ollama";
             repo = "ollama";
-            rev = "v0.20.5";
-            sha256 = "sha256-/H4DZ/aRB04lKSke9XsK+vb76pcy940scoTunXO4pf4=";
+            rev = "v0.40.13";
+            sha256 = "sha256-cxpgG6l97S7f+XZy5Hb689MYpVnbaqxBhzHLL62zAKM=";
             fetchSubmodules = true;
           };
           vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
